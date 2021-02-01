@@ -21,17 +21,23 @@ import com.prime.service.impl.SievePrimeService;
 public class PrimeServiceFactory {
 	private SievePrimeService sievePrimeService;
 	private NaivePrimeService naivePrimeService;
-	
+
 	@Autowired
-	public PrimeServiceFactory(SievePrimeService strategySieveService, NaivePrimeService strategyGeneralService) {
-		this.sievePrimeService = strategySieveService;
-		this.naivePrimeService= strategyGeneralService;
+	public PrimeServiceFactory(SievePrimeService sievePrimeService, NaivePrimeService naivePrimeService) {
+		this.sievePrimeService = sievePrimeService;
+		this.naivePrimeService = naivePrimeService;
 	}
-	
+
+	/**
+	 * Returns the specific Service object based on the provided algoType
+	 * 
+	 * @param algoType
+	 * @return
+	 */
 	public Optional<BasePrimeService> getPrimeServise(String algoType) {
-		if(AlgoType.SIEVE.name().equalsIgnoreCase(algoType)) {
+		if (AlgoType.SIEVE.name().equalsIgnoreCase(algoType)) {
 			return Optional.of(sievePrimeService);
-		} else if(AlgoType.NAIVE.name().equalsIgnoreCase(algoType)) {
+		} else if (AlgoType.NAIVE.name().equalsIgnoreCase(algoType)) {
 			return Optional.of(naivePrimeService);
 		}
 		return Optional.empty();

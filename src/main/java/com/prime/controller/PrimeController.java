@@ -31,9 +31,19 @@ public class PrimeController {
 		this.primeProcess = primeProcess;
 	}
 
-	@RequestMapping(value = "/{number}", method = RequestMethod.GET, 
-			//consumes = { MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE },
-			produces = { MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE })
+	/**
+	 * Invoking processor and returns ResponseEntity of PrimeResponseVO or
+	 * ErrorResponseVO
+	 * 
+	 * @param algoType
+	 * @param range
+	 * @return
+	 */
+	@RequestMapping(value = "/{number}", method = RequestMethod.GET,
+			// consumes = {
+			// MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE,
+			// MediaType.TEXT_HTML_VALUE },
+			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Object> getPrimeList(
 			@RequestHeader(value = "algorithm-type", defaultValue = "sieve") String algoType,

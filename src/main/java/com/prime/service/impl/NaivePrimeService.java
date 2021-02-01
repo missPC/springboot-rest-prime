@@ -16,14 +16,14 @@ import com.prime.service.BasePrimeService;
 @Service
 public class NaivePrimeService implements BasePrimeService {
 	private final Logger logger = LoggerFactory.getLogger(NaivePrimeService.class);
-	
+
 	@Override
 	@Cacheable(value = "primeList")
 	public List<Integer> generatePrime(int range) {
 		logger.info("Generating prime using optimized naive approach.");
 		List<Integer> primes = new ArrayList<Integer>();
-		
-		//Check isPrime for all element
+
+		// Check isPrime for all element
 		for (int i = 2; i <= range; i++) {
 			if (isPrime(i)) {
 				primes.add(i);
@@ -33,7 +33,7 @@ public class NaivePrimeService implements BasePrimeService {
 	}
 
 	/*
-	 * An optimized to check if a number is prime or not.
+	 * An optimised to check if a number is prime or not.
 	 */
 	public static boolean isPrime(int range) {
 		if (range == 2 || range == 3) {
@@ -45,10 +45,9 @@ public class NaivePrimeService implements BasePrimeService {
 			return false;
 		}
 
-	
 		// loop till square root of range and verify only odd number
 		for (int i = 3; i <= Math.sqrt(range); i += 2) {
-			//verify divisible by i
+			// verify divisible by i
 			if (range % i == 0) {
 				return false;
 			}

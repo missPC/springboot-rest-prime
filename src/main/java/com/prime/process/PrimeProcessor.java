@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.prime.exception.PrimeValidationException;
 import com.prime.factory.PrimeServiceFactory;
 import com.prime.service.BasePrimeService;
-import com.prime.service.impl.NaivePrimeService;
 import com.prime.vo.ErrorResponseVO;
 import com.prime.vo.PrimeResopnseVO;
 
@@ -32,6 +31,15 @@ public class PrimeProcessor {
 		this.primeServiceFactory = primeServiceFactory;
 	}
 
+	/**
+	 * Validates the input, invoke the specified service based on provided AlgoType
+	 * and return response
+	 * 
+	 * @param range
+	 * @param algoType
+	 * 
+	 * @return PrimeResopnseVO
+	 */
 	public PrimeResopnseVO process(int range, String algoType) {
 		// validate the input
 		if (range < 0) {
@@ -53,11 +61,17 @@ public class PrimeProcessor {
 		BasePrimeService basePrimeService = optionalService.get();
 		List<Integer> list = basePrimeService.generatePrime(range); // mock 2, 3, 5, 7
 
-		// populate and return responsevo
+		// populate and return responseVO
 		return createOutput(range, list);
 	}
 
-	// populate response vo
+	/**
+	 * populate response VO
+	 * 
+	 * @param n
+	 * @param list
+	 * @return PrimeResopnseVO
+	 */
 	private PrimeResopnseVO createOutput(int n, List<Integer> list) {
 		PrimeResopnseVO vo = new PrimeResopnseVO();
 		vo.setInitials(n);
